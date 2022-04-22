@@ -3,7 +3,7 @@ angular-ui<br/>
 
 # spring-cloud
 spring-cloud-api<br/>
-¶à¸öÎ¢·şÎñ:<br/>
+å¤šä¸ªå¾®æœåŠ¡:<br/>
     eureka-server<br/>
     product-data-service<br/>
     product-view-service-ribbon<br/>
@@ -13,8 +13,8 @@ spring-cloud-api<br/>
     turbine<br/>
     zuul<br/>
 
-¶Ë¿ÚºÅ×Ü½á:<br/>
-Î¢·şÎñ£º <br/>
+ç«¯å£å·æ€»ç»“:<br/>
+å¾®æœåŠ¡ï¼š <br/>
 eureka-server: 8761<br/>
 product-data-service: 8001,8002,8003<br/>
 product-view-service-ribbon: 8010<br/>
@@ -23,6 +23,6 @@ hystrix-dashboard: 8020<br/>
 turbine: 8021<br/>
 config-server: 8030<br/>
 zuul: 8040<br/>
-µÚÈı·½:<br/>
+ç¬¬ä¸‰æ–¹:<br/>
 zipkin:9411<br/>
 rabbitMQ: 5672<br/>
