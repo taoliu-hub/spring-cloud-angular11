@@ -1,5 +1,6 @@
 package cn.peach;
 
+import brave.sampler.Sampler;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.NetUtil;
@@ -57,9 +58,16 @@ public class ProductViewServiceRibbonApplication
         new SpringApplicationBuilder(ProductViewServiceRibbonApplication.class).properties("server.port=" + port).run(args);
 
     }
+
     @Bean
     @LoadBalanced
     RestTemplate restTemplate() {
         return new RestTemplate();
+    }
+
+
+    @Bean
+    public Sampler defaultSampler() {
+        return Sampler.ALWAYS_SAMPLE;
     }
 }
