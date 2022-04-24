@@ -8,7 +8,8 @@
 		<module>../product-data-service</module>
 		<module>../product-view-service-ribbon</module>
 		<module>../product-view-service-feign</module>
-	</modules>
+        <module>../config-server</module>
+    </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
