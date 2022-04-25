@@ -1,31 +1,38 @@
 package cn.peach;
 
+import brave.sampler.Sampler;
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.core.util.NetUtil;
+import cn.hutool.core.util.NumberUtil;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
+
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import brave.sampler.Sampler;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
-
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.util.NetUtil;
-import cn.hutool.core.util.NumberUtil;
-import org.springframework.context.annotation.Bean;
-
 @SpringBootApplication
 @EnableEurekaClient
 @EnableDiscoveryClient
 @EnableFeignClients
+@EnableCircuitBreaker   //把信息共享给监控中心
 public class ProductViewServiceFeignApplication {
 
     public static void main(String[] args) {
+        //判断 rabiitMQ 是否启动
+        int rabbitMQPort = 5672;
+        if(NetUtil.isUsableLocalPort(rabbitMQPort)) {
+            System.err.printf("未在端口%d 发现 rabbitMQ服务，请检查rabbitMQ 是否启动", rabbitMQPort );
+            System.exit(1);
+        }
         int port = 0;
         int defaultPort = 8012;
         Future<Integer> future = ThreadUtil.execAsync(() ->{

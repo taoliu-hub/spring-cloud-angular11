@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      label: develop
+      name: product-view-service-feign
+      profile: dev
+      server:
+        git:
+          uri: https://github.com/taoliu-hub/spring-cloud-angular11.git
+          searchPaths: respo
+          default-label: main
+          timeout: 500000
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
